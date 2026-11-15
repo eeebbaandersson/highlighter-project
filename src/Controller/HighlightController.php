@@ -25,7 +25,16 @@ class HighlightController extends AbstractController
     public function create(Request $request, HighlightService $highlightService): JsonResponse
     {
       try {
-          $data = json_decode($request->getContent(), true);
+          $body = $request->getContent();
+
+          if (!is_object(json_decode($body))) {
+              return $this->json(
+                  ['error' => 'Request body must be a valid JSON object'],
+                  JsonResponse::HTTP_BAD_REQUEST
+              );
+          }
+
+          $data = json_decode($body, true);
           $highlight = $highlightService->createHighlight($data);
 
           return $this->json($highlight, JsonResponse::HTTP_CREATED);
@@ -38,7 +47,16 @@ class HighlightController extends AbstractController
     public function update(Request $request, int $id, HighlightService $highlightService): JsonResponse
     {
         try {
-            $data = json_decode($request->getContent(), true);
+            $body = $request->getContent();
+
+            if (!is_object(json_decode($body))) {
+                return $this->json(
+                    ['error' => 'Request body must be a valid JSON object'],
+                    JsonResponse::HTTP_BAD_REQUEST
+                );
+            }
+
+            $data = json_decode($body, true);
             $highlight = $highlightService->updateHighlight($id, $data);
 
             return $this->json($highlight, JsonResponse::HTTP_OK);
