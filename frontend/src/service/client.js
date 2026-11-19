@@ -18,7 +18,7 @@ async function request(endpoint, options = {}) {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.message || `HTTP-fel: ${response.status}`)
+        throw new Error(errorData?.error || errorData?.message || `HTTP-error: ${response.status}`)
     }
 
     if (response.status === 204) return null
