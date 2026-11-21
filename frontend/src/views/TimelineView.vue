@@ -18,7 +18,6 @@ const months = [
     { index: 12, label: 'DEC' },
 ]
 
-
 const highlights = ref([
     { id: 1, date: '2026-01-14', title: 'Projektstart & Arkitektur', category: 'Arbete' },
     { id: 2, date: '2026-02-18', title: 'Första prototypen i Vue', category: 'Projekt' },
@@ -31,12 +30,10 @@ const highlights = ref([
     { id: 9, date: '2026-11-20', title: 'Tidslinjen tar form', category: 'Projekt' },
 ])
 
-
 function parseDateParts(isoDate) {
     const [year, month, day] = isoDate.split('-').map(Number)
     return { year, month, day }
 }
-
 
 const highlightsByMonth = computed(() => {
     const grouped = {}
@@ -68,7 +65,6 @@ const highlightsByMonth = computed(() => {
     <main class="timeline-page">
         <header class="timeline-header">
             <div class="title-group">
-<!--                <span class="eyebrow">Overview</span>-->
                 <h1>{{ selectedYear }}
                     <span class="overview">OVERVIEW</span>
                 </h1>
@@ -171,7 +167,6 @@ const highlightsByMonth = computed(() => {
     border-color: rgba(255, 255, 255, 0.25);
 }
 
-
 .timeline-scroll-container {
     flex: 1;
     display: flex;
@@ -188,7 +183,6 @@ const highlightsByMonth = computed(() => {
     min-width: 1200px;
     height: 540px;
 }
-
 
 .axis-line {
     position: absolute;
@@ -330,7 +324,7 @@ const highlightsByMonth = computed(() => {
 }
 
 .highlight-item:hover .item-date {
-    color:  #67e8f9;
+    color: #67e8f9;
 }
 
 .item-title {
@@ -344,5 +338,138 @@ const highlightsByMonth = computed(() => {
 
 .highlight-item:hover .item-title {
     color: rgba(255, 255, 255, 0.96);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .timeline-header {
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .title-group {
+        min-width: 0;
+    }
+
+    .timeline-header h1 {
+        font-size: 1.35rem;
+    }
+
+    .btn-ghost {
+        flex-shrink: 0;
+        padding: 0.45rem 0.85rem;
+    }
+
+    .timeline-page {
+        padding: 1.5rem 1.25rem 3rem;
+    }
+
+    .timeline-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .timeline-scroll-container {
+        display: block;
+        overflow-x: visible;
+        padding: 0.5rem 0;
+    }
+
+    .timeline-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        gap: 0.25rem;
+        padding-left: 2.25rem;
+    }
+
+    .axis-line {
+        top: 0;
+        bottom: 0;
+        left: 0.65rem;
+        right: auto;
+        width: 1px;
+        height: auto;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(255, 255, 255, 0.18) 12%,
+            rgba(255, 255, 255, 0.18) 88%,
+            rgba(255, 255, 255, 0.04) 100%
+        );
+    }
+
+    .month-column {
+        height: auto;
+        padding: 0.65rem 0;
+    }
+
+
+    .month-column.is-top .stem-wrapper,
+    .month-column.is-bottom .stem-wrapper {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: 0;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-top: 0.6rem;
+    }
+
+    .month-column.is-top .items-stack,
+    .month-column.is-bottom .items-stack {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .month-marker,
+    .month-column.is-bottom .month-marker {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: 0;
+        transform: none;
+        padding: 0;
+    }
+
+
+    .month-column.is-top .axis-dot,
+    .month-column.is-bottom .axis-dot {
+        top: 1.15rem;
+        bottom: auto;
+        left: -1.6rem;
+        transform: translate(-50%, -50%);
+    }
+
+    .stem-line {
+        width: 18px;
+        height: 0;
+        border-left: none;
+        border-top: 1px dashed rgba(255, 255, 255, 0.22);
+        margin-left: -1.6rem;
+        margin-top: 1.15rem;
+        flex-shrink: 0;
+    }
+
+    .items-stack {
+        margin-left: 0.35rem;
+        padding: 0;
+    }
+
+    .item-content {
+        width: auto;
+        max-width: calc(100vw - 6.5rem);
+    }
+
+    .highlight-item:hover {
+        transform: translatex(2px);
+    }
+
 }
 </style>
