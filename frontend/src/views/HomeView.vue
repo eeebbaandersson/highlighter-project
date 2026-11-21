@@ -99,6 +99,7 @@ h1 {
     padding: 0.85rem 2rem;
     font-size: 1rem;
     font-weight: 600;
+    letter-spacing: 1px;
     border-radius: 9999px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -108,11 +109,12 @@ h1 {
 
     display: inline-block;
     text-decoration: none;
+    transition: transform 0.2s ease;
 }
 
 .primary-btn:hover {
-    background-color: rgba(103, 232, 249, 0.18);
     box-shadow: 0 0 20px rgba(103, 232, 249, 0.2);
+
 }
 
 </style>
